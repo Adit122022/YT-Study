@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import Card from './Card'
-import { motion } from "framer-motion"
 
 const Foreground = () => {
+    const ref = useRef(null)
     const narutoQuotes = [
         {
           name: "Naruto Uzumaki",
@@ -125,9 +125,9 @@ const Foreground = () => {
       
     // const [first, setfirst] = useState(second)
   return (
-    <div className="scrollbar w-full h-full  fixed top-0 left-0 flex gap-10 overflow-x-hidden overflow-y-scroll  flex-wrap justify-center p-5 z-[3]">
+    <div ref={ref} className="scrollbar w-full h-full  fixed top-0 left-0 flex gap-10 overflow-x-hidden overflow-y-scroll  flex-wrap justify-center p-5 z-[3]">
 {narutoQuotes.map((value,index)=>{
-   return <Card data ={value} />
+   return <Card data ={value}  refrence={ref}/>
     
 })}
     </div>
