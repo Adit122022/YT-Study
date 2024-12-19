@@ -20,6 +20,7 @@ const Card = ({data ,refrence}) => {
    {data.tag.isOpen && (  <div className={`w-full ${data.tag.tagColor === "blue" ? "bg-blue-600" : "bg-green-600"} py-4 flex justify-center items-center`}>
        <h3 className='text-sm font-semiSbold'> {data.tag.Tagtitle}</h3>
     </div>) }
+    
    
 </div>
     </motion.div>
