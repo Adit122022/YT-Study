@@ -127,7 +127,7 @@ const Foreground = () => {
   return (
     <div ref={ref} className="scrollbar w-full h-full  fixed top-0 left-0 flex gap-10 overflow-x-hidden overflow-y-scroll  flex-wrap justify-center p-5 z-[3]">
 {narutoQuotes.map((value,index)=>{
-   return <Card data ={value}  refrence={ref}/>
+   return <Card key={index} data ={value}  refrence={ref}/>
     
 })}
     </div>
