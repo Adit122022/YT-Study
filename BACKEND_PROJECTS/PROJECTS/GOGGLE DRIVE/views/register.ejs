@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
+    <title>Glassmorphism Form</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fbc2eb, #a18cd1, #fad0c4);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+        }
+
+        @keyframes gradientBG {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .glassmorphism {
+            background: rgba(0, 0, 0, 0.212);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        }
+    </style>
+</head>
+<body class="dark:bg-gray-800 light:bg-gray-100">
+   
+<form class="w-screen h-screen p-[10vh] flex justify-center items-center" action="/user/register" method="post">
+    <div class="glassmorphism gap-6 mb-6 md:grid-cols-2 w-[40%] rounded-xl p-8 ">
+        <div class="">
+            <h1 class="w-full text-center text-4xl font-bold text-gray-700">REGISTER</h1>
+        </div>
+        <div class="mb-6">
+            <label for="username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Username</label>
+            <input type="text" id="username" class="bg-gray-50 bg-opacity-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 block w-full p-2.5" placeholder="John"
+            name="username" required />
+        </div>
+          
+        <div class="mb-6">
+            <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email address</label>
+            <input type="email" id="email" class="bg-gray-50 bg-opacity-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 block w-full p-2.5" placeholder="john.doe@company.com" name="email" required />
+        </div> 
+        <div class="mb-6">
+            <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
+            <input type="password" id="password" class="bg-gray-50 bg-opacity-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 block w-full p-2.5" name="password" placeholder="•••••••••" required />
+        </div> 
+
+        <button type="submit" class=" text-white bg-gradient-to-r from-pink-500 to-purple-500 hover:transition-all hover:duration-150 hover:bg-gradient-to-l focus:ring-4 active:scale-90 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm w-full sm:w-auto px-10 py-2.5 text-center">Submit
+        </button>
+    </div>
+</form>
+
+<script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
+</body>
+</html>
