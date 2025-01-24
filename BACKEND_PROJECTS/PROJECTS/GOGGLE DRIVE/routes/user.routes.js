@@ -6,11 +6,10 @@ const userModel = require('../models/user.model')
 router.get('/register', (req,res) =>{
     res.render('register');
 })
-router.post(
-    '/register',
-        body('email').trim().isEmail().isLength({min:10}),
-        body('username').trim().isLength({ min: 3 }),
-        body('password').trim().isLength({ min: 5 }),
+router.post( '/register',
+        // body('email').trim().isEmail().isLength({min:10}),
+        // body('username').trim().isLength({ min: 3 }),
+        // body('password').trim().isLength({ min: 5 }),
    async  (req, res) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
