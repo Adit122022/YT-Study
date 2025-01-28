@@ -63,6 +63,16 @@ The request body should be a JSON object containing the following fields:
           "msg": "Invalid first name",
           "param": "fullname.firstname",
           "location": "body"
+        },
+        {
+          "msg": "Invalid last name",
+          "param": "fullname.lastname",
+          "location": "body"
+        },
+        {
+          "msg": "Password must be at least 6 characters long",
+          "param": "password",
+          "location": "body"
         }
       ]
     }
@@ -72,3 +82,38 @@ The request body should be a JSON object containing the following fields:
 - `201`: User successfully registered.
 - `400`: Invalid input data.
 
+#### Example Response
+```json
+{
+  "token": "jwt_token_here",
+  "user": {
+    "_id": "user_id_here",
+    "fullname": {
+      "firstname": "John",
+      "lastname": "Doe"
+    },
+    "email": "user@example.com"
+  }
+}
+```
+
+#### markdown
+- `user` (object):
+    - `_id` (string): The user's unique identifier.
+    - `fullname` (object): An object containing the user's full name.
+    - `firstname` (string): The user's first name.
+    - `lastname` (string): The user's last name.
+    - `email` (string): The user's email address.
+    - `password` (string): The user's password. Must be at least 6 characters long.
+    - `token` (string): The user's token. Must be at least 6 characters long.
+
+
+#### Error Handling
+- **Invalid Email**: If the email is not valid, the response will include an error message indicating the invalid email.
+- **Invalid First Name**: If the first name is not at least 3 characters long, the response will include an error message indicating the invalid first name.
+- **Invalid Last Name**: If the last name is not at least 3 characters long, the response will include an error message indicating the invalid last name.
+- **Invalid Password**: If the password is not at least 6 characters long, the response will include an error message indicating the invalid password.
+
+#### Notes
+- Ensure that the email provided is unique and not already registered in the system.
+- Passwords are hashed before being stored in the database for security purposes.
