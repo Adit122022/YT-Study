@@ -117,3 +117,103 @@ The request body should be a JSON object containing the following fields:
 #### Notes
 - Ensure that the email provided is unique and not already registered in the system.
 - Passwords are hashed before being stored in the database for security purposes.
+
+
+
+### POST /users/login
+
+#### Description
+This endpoint is used to log in an existing user.
+
+#### Request Body
+The request body should be a JSON object containing the following fields:
+- `email` (string): The user's email address. Must be a valid email.
+- `password` (string): The user's password. Must be at least 6 characters long.
+
+#### Example Request
+```json
+{
+  "email": "user@example.com",
+  "password": "password123"
+}
+```
+
+#### Responses
+
+- **200 OK**
+  - **Description**: User successfully logged in.
+  - **Body**: A JSON object containing the authentication token and user details.
+  - **Example**:
+    ```json
+    {
+      "token": "jwt_token_here",
+      "user": {
+        "_id": "user_id_here",
+        "fullname": {
+          "firstname": "John",
+          "lastname": "Doe"
+        },
+        "email": "user@example.com"
+      }
+    }
+    ```
+
+- **400 Bad Request**
+  - **Description**: Invalid input data.
+  - **Body**: A JSON object containing the validation errors.
+  - **Example**:
+    ```json
+    {
+      "errors": [
+        {
+          "msg": "Invalid email",
+          "param": "email",
+          "location": "body"
+        },
+        {
+          "msg": "Password must be at least 6 characters long",
+          "param": "password",
+          "location": "body"
+        }
+      ]
+    }
+    ```
+
+- **401 Unauthorized**
+  - **Description**: Invalid email or password.
+  - **Body**: A JSON object containing an error message.
+  - **Example**:
+    ```json
+    {
+      "message": "Invalid email or password"
+    }
+    ```
+
+#### Status Codes
+- `200`: User successfully logged in.
+- `400`: Invalid input data.
+- `401`: Invalid email or password.
+
+#### Example Response
+```json
+{
+  "token": "jwt_token_here",
+  "user": {
+    "_id": "user_id_here",
+    "fullname": {
+      "firstname": "John",
+      "lastname": "Doe"
+    },
+    "email": "user@example.com"
+  }
+}
+```
+
+#### Error Handling
+- **Invalid Email**: If the email is not valid, the response will include an error message indicating the invalid email.
+- **Invalid Password**: If the password is not at least 6 characters long, the response will include an error message indicating the invalid password.
+- **Invalid Credentials**: If the email or password is incorrect, the response will include an error message indicating invalid credentials.
+
+#### Notes
+- Ensure that the email provided is registered in the system.
+- Passwords are compared using a secure method to ensure user security.
