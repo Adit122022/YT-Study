@@ -217,3 +217,107 @@ The request body should be a JSON object containing the following fields:
 #### Notes
 - Ensure that the email provided is registered in the system.
 - Passwords are compared using a secure method to ensure user security.
+
+### GET /users/profile
+
+#### Description
+This endpoint is used to retrieve the profile of the logged-in user.
+
+#### Request Headers
+- `Authorization` (string): The Bearer token for authentication.
+
+#### Responses
+
+- **200 OK**
+  - **Description**: User profile successfully retrieved.
+  - **Body**: A JSON object containing the user details.
+  - **Example**:
+    ```json
+    {
+      "_id": "user_id_here",
+      "fullname": {
+        "firstname": "John",
+        "lastname": "Doe"
+      },
+      "email": "user@example.com"
+    }
+    ```
+
+- **401 Unauthorized**
+  - **Description**: Invalid or missing authentication token.
+  - **Body**: A JSON object containing an error message.
+  - **Example**:
+    ```json
+    {
+      "message": "Unauthorized"
+    }
+    ```
+
+#### Status Codes
+- `200`: User profile successfully retrieved.
+- `401`: Invalid or missing authentication token.
+
+#### Example Response
+```json
+{
+  "_id": "user_id_here",
+  "fullname": {
+    "firstname": "John",
+    "lastname": "Doe"
+  },
+  "email": "user@example.com"
+}
+```
+
+#### Error Handling
+- **Unauthorized**: If the authentication token is invalid or missing, the response will include an error message indicating unauthorized access.
+
+#### Notes
+- Ensure that the request includes a valid Bearer token in the Authorization header.
+
+### POST /users/logout
+
+#### Description
+This endpoint is used to log out the currently logged-in user.
+
+#### Request Headers
+- `Authorization` (string): The Bearer token for authentication.
+
+#### Responses
+
+- **200 OK**
+  - **Description**: User successfully logged out.
+  - **Body**: A JSON object containing a success message.
+  - **Example**:
+    ```json
+    {
+      "message": "Successfully logged out"
+    }
+    ```
+
+- **401 Unauthorized**
+  - **Description**: Invalid or missing authentication token.
+  - **Body**: A JSON object containing an error message.
+  - **Example**:
+    ```json
+    {
+      "message": "Unauthorized"
+    }
+    ```
+
+#### Status Codes
+- `200`: User successfully logged out.
+- `401`: Invalid or missing authentication token.
+
+#### Example Response
+```json
+{
+  "message": "Successfully logged out"
+}
+```
+
+#### Error Handling
+- **Unauthorized**: If the authentication token is invalid or missing, the response will include an error message indicating unauthorized access.
+
+#### Notes
+- Ensure that the request includes a valid Bearer token in the Authorization header.
