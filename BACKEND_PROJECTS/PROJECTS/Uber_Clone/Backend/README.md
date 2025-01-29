@@ -467,3 +467,134 @@ The request body should be a JSON object containing the following fields:
 #### Notes
 - Ensure that the email provided is unique and not already registered in the system.
 - Passwords are hashed before being stored in the database for security purposes.
+
+### POST /captains/login
+
+#### Description
+This endpoint is used to log in an existing captain.
+
+#### Request Body
+The request body should be a JSON object containing the following fields:
+- `email` (string): The captain's email address. Must be a valid email.
+- `password` (string): The captain's password. Must be at least 6 characters long.
+
+#### Example Request
+```json
+{
+  "email": "captain@example.com",
+  "password": "password123"
+}
+```
+
+#### Responses
+
+- **200 OK**
+  - **Description**: Captain successfully logged in.
+  - **Body**: A JSON object containing the authentication token and captain details.
+  - **Example**:
+    ```json
+    {
+      "token": "jwt_token_here",
+      "captain": {
+        "_id": "captain_id_here",
+        "fullname": {
+          "firstname": "Jane",
+          "lastname": "Doe"
+        },
+        "email": "captain@example.com",
+        "vehicle": {
+          "color": "red",
+          "plate": "ABC123",
+          "capacity": 4,
+          "vehicleType": "car"
+        }
+      }
+    }
+    ```
+
+- **401 Unauthorized**
+  - **Description**: Invalid email or password.
+  - **Example**:
+    ```json
+    {
+      "message": "Invalid email or password"
+    }
+    ```
+
+### GET /captains/profile
+
+#### Description
+This endpoint retrieves the profile of the currently logged-in captain.
+
+#### Request Headers
+- `Authorization`: Bearer token required for authentication
+
+#### Responses
+
+- **200 OK**
+  - **Description**: Captain profile successfully retrieved.
+  - **Example**:
+    ```json
+    {
+      "_id": "captain_id_here",
+      "fullname": {
+        "firstname": "Jane",
+        "lastname": "Doe"
+      },
+      "email": "captain@example.com",
+      "vehicle": {
+        "color": "red",
+        "plate": "ABC123",
+        "capacity": 4,
+        "vehicleType": "car"
+      },
+      "status": "inactive",
+      "location": {
+        "lat": 0,
+        "lng": 0
+      }
+    }
+    ```
+
+- **401 Unauthorized**
+  - **Description**: Invalid or missing authentication token.
+  - **Example**:
+    ```json
+    {
+      "message": "Unauthorized"
+    }
+    ```
+
+### GET /captains/logout
+
+#### Description
+This endpoint logs out the currently authenticated captain.
+
+#### Request Headers
+- `Authorization`: Bearer token required for authentication
+
+#### Responses
+
+- **200 OK**
+  - **Description**: Captain successfully logged out.
+  - **Example**:
+    ```json
+    {
+      "message": "Successfully logged out from Captain"
+    }
+    ```
+
+- **401 Unauthorized**
+  - **Description**: Invalid or missing authentication token.
+  - **Example**:
+    ```json
+    {
+      "message": "Unauthorized"
+    }
+    ```
+
+#### Notes
+- All captain endpoints except registration and login require authentication via Bearer token
+- The token is invalidated (blacklisted) upon logout
+- Captain status can be either 'active' or 'inactive'
+- Location coordinates are optional and default to {lat: 0, lng: 0}
