@@ -1,7 +1,7 @@
 # Uber Clone Backend API Documentation
 
 ## Endpoints
-
+ # Users ROUTES
 ### POST /users/register
 
 #### Description
@@ -321,3 +321,149 @@ This endpoint is used to log out the currently logged-in user.
 
 #### Notes
 - Ensure that the request includes a valid Bearer token in the Authorization header.
+
+
+ # CAPTAINS ROUTES
+### POST /captains/register
+
+#### Description
+This endpoint is used to register a new captain.
+
+#### Request Body
+The request body should be a JSON object containing the following fields:
+- `email` (string): The captain's email address. Must be a valid email.
+- `fullname` (object): An object containing the captain's full name.
+  - `firstname` (string): The captain's first name. Must be at least 3 characters long.
+  - `lastname` (string): The captain's last name. Must be at least 3 characters long.
+- `password` (string): The captain's password. Must be at least 6 characters long.
+- `vehicle` (object): An object containing the vehicle details.
+  - `color` (string): The vehicle's color. Must be at least 3 characters long.
+  - `plate` (string): The vehicle's plate number. Must be at least 3 characters long.
+  - `capacity` (number): The vehicle's capacity. Must be at least 1.
+  - `vehicleType` (string): The type of vehicle. Must be one of 'car', 'motorcycle', or 'auto'.
+
+#### Example Request
+```json
+{
+  "email": "captain@example.com",
+  "fullname": {
+    "firstname": "Jane",
+    "lastname": "Doe"
+  },
+  "password": "password123",
+  "vehicle": {
+    "color": "red",
+    "plate": "ABC123",
+    "capacity": 4,
+    "vehicleType": "car"
+  }
+}
+```
+
+#### Responses
+
+- **201 Created**
+  - **Description**: Captain successfully registered.
+  - **Body**: A JSON object containing the authentication token and captain details.
+  - **Example**:
+    ```json
+    {
+      "token": "jwt_token_here",
+      "captain": {
+        "_id": "captain_id_here",
+        "fullname": {
+          "firstname": "Jane",
+          "lastname": "Doe"
+        },
+        "email": "captain@example.com",
+        "vehicle": {
+          "color": "red",
+          "plate": "ABC123",
+          "capacity": 4,
+          "vehicleType": "car"
+        }
+      }
+    }
+    ```
+
+- **400 Bad Request**
+  - **Description**: Invalid input data.
+  - **Body**: A JSON object containing the validation errors.
+  - **Example**:
+    ```json
+    {
+      "errors": [
+        {
+          "msg": "Invalid email",
+          "param": "email",
+          "location": "body"
+        },
+        {
+          "msg": "First name must be at least 3 characters long",
+          "param": "fullname.firstname",
+          "location": "body"
+        },
+        {
+          "msg": "Password must be at least 6 characters long",
+          "param": "password",
+          "location": "body"
+        },
+        {
+          "msg": "Color must be at least 3 characters long",
+          "param": "vehicle.color",
+          "location": "body"
+        },
+        {
+          "msg": "Plate must be at least 3 characters long",
+          "param": "vehicle.plate",
+          "location": "body"
+        },
+        {
+          "msg": "Capacity must be at least 1",
+          "param": "vehicle.capacity",
+          "location": "body"
+        },
+        {
+          "msg": "Invalid vehicle type",
+          "param": "vehicle.vehicleType",
+          "location": "body"
+        }
+      ]
+    }
+    ```
+
+#### Status Codes
+- `201`: Captain successfully registered.
+- `400`: Invalid input data.
+
+#### Example Response
+```json
+{
+  "token": "jwt_token_here",
+  "captain": {
+    "_id": "captain_id_here",
+    "fullname": {
+      "firstname": "Jane",
+      "lastname": "Doe"
+    },
+    "email": "captain@example.com",
+    "vehicle": {
+      "color": "red",
+      "plate": "ABC123",
+      "capacity": 4,
+      "vehicleType": "car"
+    }
+  }
+}
+```
+
+#### Error Handling
+- **Invalid Email**: If the email is not valid, the response will include an error message indicating the invalid email.
+- **Invalid First Name**: If the first name is not at least 3 characters long, the response will include an error message indicating the invalid first name.
+- **Invalid Last Name**: If the last name is not at least 3 characters long, the response will include an error message indicating the invalid last name.
+- **Invalid Password**: If the password is not at least 6 characters long, the response will include an error message indicating the invalid password.
+- **Invalid Vehicle Details**: If any of the vehicle details are invalid, the response will include an error message indicating the invalid vehicle details.
+
+#### Notes
+- Ensure that the email provided is unique and not already registered in the system.
+- Passwords are hashed before being stored in the database for security purposes.
