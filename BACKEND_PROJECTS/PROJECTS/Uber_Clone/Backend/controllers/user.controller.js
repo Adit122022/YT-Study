@@ -9,6 +9,8 @@ const {UserModel} = require('../models/user.model')
         return res.status(400).json({errors : error.array()})
     }
     const { fullname, email, password } = req.body;
+     const isUserAlready = await UserModel.findOne({email});
+     if(isUserAlready) return res.status(400).json({message: 'Email already exists'})
     const hashedPassword = await UserModel.hashPassword(password);
     const user = await userService.createUser({
         firstname:fullname.firstname,
