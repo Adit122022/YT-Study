@@ -11,7 +11,7 @@ const UserSignUp = () => {
   const submithandler =(e)=>{
     e.preventDefault();
     setuserData({
-      username:{
+      fullname:{
         firstname,
         lastname,
       },
@@ -54,8 +54,9 @@ const UserSignUp = () => {
       </form>
        </div>
        <div>
-        <p className='text-center text-base leading-tight'>
-          By proceeding, you consent to get calls, WhatsApp or SMS messages, including by automated means, from Uber and its affiliates to the number provided.
+        <p className='text-center text-sm leading-tight'>
+         This site is protected bt reCAPTCHA and the <span className='underline text-blue-400'>Google Privacy Policy</span> and
+           <span className='underline mx-0.5 text-blue-400'>Terms of Service</span> apply.
         </p>
        </div>
     </div>
