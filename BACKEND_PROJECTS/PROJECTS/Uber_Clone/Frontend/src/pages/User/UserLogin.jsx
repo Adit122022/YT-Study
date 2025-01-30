@@ -20,7 +20,7 @@ const UserLogin = () => {
   return (
     <div className='p-7  h-screen flex flex-col  justify-between'>
        <div>
-       <img className=' mb-10 object-cover w-16 ' 
+       <img className=' mb-15 mt-7 object-cover w-16 ' 
                src= {black} alt="" />
       <form onSubmit={ submithandler} action="" > 
         <h3 className='text-lg font-medium mb-2'>What's Your email</h3>
