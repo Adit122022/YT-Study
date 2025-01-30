@@ -1,6 +1,9 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import black from '/public/uber-logo-black.png';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import UserContext, { UserDataContext } from '../../context/UserContext';
+
 
 const UserSignUp = () => {
   const [firstname, setfirstname] = useState('')
@@ -8,22 +11,28 @@ const UserSignUp = () => {
   const [email, setemail] = useState('')
   const [password, setPassword] = useState('')
   const [userData, setuserData] = useState({})
-  const submithandler =(e)=>{
-    e.preventDefault();
-    setuserData({
-      fullname:{
-        firstname,
-        lastname,
-      },
-      email,
-      password,
-    })
-    setfirstname('')
-    setlastname('')
-    setPassword('')
-    setemail('')
 
-    console.log(userData)
+   const navigate= useNavigate()
+   const {user ,setUser } = useContext(UserDataContext)
+  
+  const submithandler = async(e)=>{
+    e.preventDefault();
+  
+ const newUser ={
+  fullname:{
+    firstname,
+    lastname,
+  },
+  email,
+  password,
+}
+const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/users/register`, newUser)
+if(response.status ===201){
+ const data = response.data
+ setUser(data.user)
+ localStorage.setItem('token', data.token)
+  navigate('/home')
+}   console.log(userData)
   }
   return (
     <div className='p-7   h-screen flex flex-col  justify-between'>
@@ -44,12 +53,12 @@ const UserSignUp = () => {
         <h3 className='text-lg font-medium mb-2'>What's Your email</h3>
         <input
         value={email}
-        onChange={e => setemail(e.target.value)} className='bg-[#eeee] mb-7 rounded px-4 py-2 border border-gray-300 w-full text-lg placeholder:text-base' name='email' type="email" required placeholder='Enter your mail' />
+        onChange={e => setemail(e.target.value)} className='bg-[#eeee] mb-5 rounded px-4 py-2 border border-gray-300 w-full text-lg placeholder:text-base' name='email' type="email" required placeholder='Enter your mail' />
         <h3 className='text-lg font-medium mb-2'>Enter Passowrd</h3>
         <input
         value={password}
         onChange={e => setPassword(e.target.value)} className='bg-[#eeee] mb-7 rounded px-4 py-2 border border-gray-300 w-full text-lg placeholder:text-base' name='password' type="password" required placeholder='Enter your password' />
-      <button className='bg-[#111] text-white text-xl  mb-3 font-semibold rounded-xl py-2 w-full' >Login</button>
+      <button className='bg-[#111] text-white text-xl  mb-3 font-semibold rounded-xl py-2 w-full' >Create Account</button>
      <p className='text-center text-base'>Already have account ?  <Link to='/login' className='  text-blue-600'>Login here</Link></p>
       </form>
        </div>

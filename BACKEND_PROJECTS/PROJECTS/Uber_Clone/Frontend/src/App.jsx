@@ -6,13 +6,18 @@ import UserSignUp from './pages/User/UserSignUp'
 import CaptainLogin from './pages/Captain/CaptainLogin'
 import CaptainSignUp from './pages/Captain/CaptainSignUp'
 import { UserDataContext } from './context/UserContext'
+import Start from './pages/Start'
+import UserProtectedWrapper from './pages/UserProtectedWrapper'
 
 const App = () => {
    const data =useContext(UserDataContext)
   return (
     <div >
 <Routes>
-  <Route path='/' element={<Home/>}/>
+  <Route path='/' element={<Start/>}/>
+  <Route path='/home' element={
+    <UserProtectedWrapper><Home/></UserProtectedWrapper>
+  }/>
   <Route path='/login' element={<UserLogin/>}/>
   <Route path='/signup' element={<UserSignUp/>}/>
   <Route path='/captain-login' element={<CaptainLogin/>}/>
