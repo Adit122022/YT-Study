@@ -61,7 +61,7 @@ e.preventDefault()
 
        <div ref={pannelReff} className=' opacity-0 h-[70%] bg-white  '>
 
-<LocationSearchPanel setPanelOpen ={setPanelOpen}  setVehiclePanel = {setVehiclePanel}/>
+     <LocationSearchPanel setPanelOpen ={setPanelOpen}  setVehiclePanel = {setVehiclePanel}/>
        </div>
       </div>
       <VechileInformation vehiclePanel ={vehiclePanel} setVehiclePanel ={setVehiclePanel}/>

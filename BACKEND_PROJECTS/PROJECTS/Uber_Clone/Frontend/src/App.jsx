@@ -7,11 +7,11 @@ import CaptainLogin from './pages/Captain/CaptainLogin'
 import CaptainSignUp from './pages/Captain/CaptainSignUp'
 import { UserDataContext } from './context/UserContext'
 import Start from './pages/Start'
-import UserProtectedWrapper from './pages/UserProtectedWrapper'
 import UserLogout from './pages/User/UserLogout'
 import CaptainHome from './pages/Captain/CaptainHome'
 import CaptainProtectedWrapper from './pages/Captain/CaptainProtectedWrapper'
 import CaptainLogout from './pages/Captain/CaptainLogout'
+import UserProtectedWrapper from './pages/User/UserProtectedWrapper'
 
 const App = () => {
    const data =useContext(UserDataContext)
@@ -27,7 +27,7 @@ const App = () => {
   <Route path='/captain-login' element={<CaptainLogin/>}/>
   <Route path='/captain-signup' element={<CaptainSignUp/>}/>
   <Route path='users/logout' element={
-    <UserProtectedWrapper>  <UserLogout/>  </UserProtectedWrapper> }/>
+    <UserProtectedWrapper><UserLogout/> </UserProtectedWrapper> }/>
     <Route path='/captain-home' element={<CaptainProtectedWrapper> <CaptainHome/> </CaptainProtectedWrapper>}/>
     <Route path='/captain-logout' element={<CaptainProtectedWrapper> <CaptainLogout/> </CaptainProtectedWrapper>}/>
 </Routes>

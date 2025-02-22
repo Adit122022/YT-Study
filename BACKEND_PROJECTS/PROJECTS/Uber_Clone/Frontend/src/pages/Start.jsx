@@ -4,7 +4,7 @@ import logo from '/public/uber-logo-white.png'
 import { Link } from 'react-router-dom'
 
 const Start = () => {
-  console.log(home)
+  // console.log(home)
   return (
     <div>
        <div className='bg-cover bg-center   bg-white/20 h-screen '
