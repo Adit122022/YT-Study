@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload File</title>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet"/>
+    <style>
+        .scrollbar::-webkit-scrollbar { display: none; }
+        .success-popup {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: green;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            display: none;
+            animation: fadeOut 3s forwards;
+        }
+        @keyframes fadeOut {
+            0% { opacity: 1; }
+            80% { opacity: 1; }
+            100% { opacity: 0; display: none; }
+        }
+    </style>
+</head>
+<body>
+   <main class="p-4 bg-gray-100 dark:bg-gray-800 h-screen overflow-y-scroll overflow-x-hidden w-full scrollbar">
+        <button onclick="showPopUp()" class="bg-blue-400 hover:bg-blue-700 text-white font-bold px-4 py-2 rounded">Upload File</button>
+
+        <div class="pop backdrop-blur hidden fixed flex items-center justify-center top-0 left-0 w-full px-5 h-screen">
+            <form id="upload-form" enctype="multipart/form-data" class="bg-white p-6 rounded-lg shadow-lg">
+                <div class="flex items-center justify-center w-96">
+                    <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600">
+                        <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                            <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
+                            </svg>
+                            <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
+                            <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
+                        </div>
+                        <input id="dropzone-file" type="file" class="hidden" name="file" />
+                    </label>
+                </div>
+                
+                <button type="submit" class="text-white bg-gray-700 hover:bg-gray-900 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 mt-4">Upload File</button>
+            </form>
+
+            <button onclick="closePopUp()" class="absolute top-7 right-7 text-gray-500 dark:text-gray-200 text-2xl">
+                <i class="ri-close-large-line"></i>
+            </button>
+        </div>
+
+        <!-- Success Popup -->
+        <div id="success-popup" class="success-popup">File uploaded successfully!</div>
+
+        <!-- Display uploaded file -->
+        <div id="file-preview" class="mt-5 hidden">
+            <h3 class="text-lg font-bold">Uploaded File:</h3>
+            <img id="preview-img" src="" alt="Uploaded File" class="mt-3 w-64 h-40 object-cover rounded-lg">
+            <a id="file-link" href="#" target="_blank" class="text-blue-500 block mt-2"></a>
+        </div>
+   </main>
+
+</body>
+<script>
+    function showPopUp() {
+        document.querySelector('.pop').style.display = 'flex';
+    }
+
+    function closePopUp() {
+        document.querySelector('.pop').style.display = 'none';
+    }
+
+    function showSuccessPopup() {
+        const popup = document.getElementById("success-popup");
+        popup.style.display = "block";
+        setTimeout(() => {
+            popup.style.display = "none";
+        }, 3000);
+    }
+
+    document.getElementById("upload-form").addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const formData = new FormData(event.target);
+
+        const response = await fetch("/upload", {
+            method: "POST",
+            body: formData,
+        });
+
+        const data = await response.json();
+        if (data.success && data.url) {
+            document.getElementById("file-preview").classList.remove("hidden");
+            document.getElementById("preview-img").src = data.url;
+            document.getElementById("file-link").href = data.url;
+            document.getElementById("file-link").textContent = "View Uploaded File";
+            closePopUp();
+            showSuccessPopup();
+        } else {
+            alert("Upload failed.");
+        }
+    });
+</script>
+</html>

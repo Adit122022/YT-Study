@@ -22,7 +22,7 @@ async  (req, res) => {
         }
         const { email , username , password } = req.body;
         const hashPassword = await bcrypt.hash(password ,10)
-     const newUser = await userModel.create({
+         const newUser = await userModel.create({
         email,
         username,
         password :hashPassword
@@ -62,7 +62,8 @@ router.post('/login',
             email:user.email,
             username:user.username,  
         },process.env.JWT_SECRET,)
-        res.json({ token: token })
+        res.cookie('token' ,token)
+        res.send('Logged in')
 })
 
 module.exports = router;

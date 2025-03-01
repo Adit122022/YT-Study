@@ -4,7 +4,7 @@ import { useGSAP } from '@gsap/react';
 import gsap from 'gsap'
 
 
-const VechileInformation = ({setVehiclePanel ,vehiclePanel}) => {
+const VechileInformation = ({setVehiclePanel ,vehiclePanel ,setConfirmRidePannel}) => {
      const vehcileRef = useRef(null)
      const vehcileCloseRef = useRef(null)
 
@@ -26,7 +26,7 @@ const VechileInformation = ({setVehiclePanel ,vehiclePanel}) => {
     <h5 ref={vehcileCloseRef}  onClick={()=>{ setVehiclePanel(false)}} className='absolute opacity-1 top-6 right-6 text-2xl font-bold'><i className="ri-arrow-down-wide-fill"></i></h5>
         <h1 className='text-3xl font-bold font-sans'>Chose your Ride</h1>
     </div>
-      <div className="flex items-center justify-between px-2 mb-4   border-2 border-transparent active:border-gray-800   rounded-md">
+      <div onClick={()=>{setConfirmRidePannel(true)}} className="flex items-center justify-between px-2 mb-4   border-2 border-transparent active:border-gray-800   rounded-md">
        <div className='w-24 overflow-hidden'>
        <img src={taxi} alt="Taxi Icon" className="w-full  object-cover " /> 
        </div>

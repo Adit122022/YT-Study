@@ -7,6 +7,7 @@ import 'remixicon/fonts/remixicon.css'
 import LocationSearchPanel from '../components/LocationSearchPanel';
 import VechileInformation from '../components/VechileInformation';
 import ConfirmRide from '../components/ConfirmRide';
+import LookingForDriver from '../components/LookingForDriver';
 
 gsap.registerPlugin(useGSAP);
 
@@ -15,7 +16,9 @@ const Home = () => {
   const [destination, setDestination] = useState('')
   const [panelOpen, setPanelOpen] = useState(false)
   const [vehiclePanel, setVehiclePanel] = useState(false)
-const [confirmRidePannel, setConfirmRidePannel] = useState(false)
+ const [confirmRidePannel, setConfirmRidePannel] = useState(false)
+ const [vehicleFound, setVehicleFound] = useState(false)
+
   const pannelReff = useRef(null)
   const panelCloseRef = useRef(null)
   const submithandler = (e)=>{
@@ -60,13 +63,12 @@ e.preventDefault()
        </div>
 
        <div ref={pannelReff} className=' opacity-0 h-[70%] bg-white  '>
-
      <LocationSearchPanel setPanelOpen ={setPanelOpen}  setVehiclePanel = {setVehiclePanel}/>
        </div>
       </div>
-      <VechileInformation vehiclePanel ={vehiclePanel} setVehiclePanel ={setVehiclePanel}/>
-   
-    <ConfirmRide  confirmRidePannel={confirmRidePannel} setConfirmRidePannel={setConfirmRidePannel}/>
+      <VechileInformation setConfirmRidePannel={setConfirmRidePannel} vehiclePanel ={vehiclePanel} setVehiclePanel ={setVehiclePanel}/>
+      <ConfirmRide  confirmRidePannel={confirmRidePannel} setConfirmRidePannel={setConfirmRidePannel}/>
+      <LookingForDriver/>
     </div>
   )
 }
