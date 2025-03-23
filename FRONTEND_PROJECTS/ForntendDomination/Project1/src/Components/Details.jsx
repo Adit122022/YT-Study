@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import axios from '../utils/axios';
 import Loading from './Loading';
+import { IoMdArrowRoundBack } from "react-icons/io";
 
 const Details = () => {
   const [p, setP] = useState(null);
@@ -23,6 +24,16 @@ const Details = () => {
 
   return p ? (
     <div className="w-full min-h-screen flex flex-col items-center bg-gray-100 py-10">
+      {/* Product Info */}
+      <div className="flex items-center w-full px-9 justify-between gap-3 mb-10">
+        <Link to="/" className="px-5 py-2 border rounded border-blue-300 flex items-center gap-5 text-blue-400"><IoMdArrowRoundBack />
+        Back</Link>
+        <h1 className="text-2xl font-semibold text-gray-800">Product Details</h1>
+        <div className="flex items-center gap-2 text-sm text-gray-500">
+          <span>{p.category}</span>
+          <span>{p.price.toFixed(2)}</span>
+        </div>
+      </div>
       {/* Container */}
       <div className="w-[90%] lg:w-[70%] bg-white rounded-lg shadow-lg overflow-hidden flex flex-col lg:flex-row">
         {/* Product Image */}

@@ -24,9 +24,8 @@ const Home = () => {
   };
 
   return products ? (
-    <>
+    <div className='flex flex-col lg:flex-row'>
       <Nav />
-
       <div className="h-full w-[90%] mx-auto p-6 bg-red-100 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 overflow-x-hidden overflow-y-scroll scrol">
         {products.map((product) => (
           
@@ -48,7 +47,7 @@ const Home = () => {
           </Link>
         ))}
       </div>
-    </>
+    </div>
   ) : (
     <Loading />
   );

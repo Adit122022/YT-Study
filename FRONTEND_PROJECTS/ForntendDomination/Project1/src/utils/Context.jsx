@@ -1,4 +1,4 @@
-import axios from './axios'
+import axios from './axios' 
 import React, { createContext ,useEffect,useState } from 'react'
 
 export const ProductContext =createContext();
@@ -8,14 +8,12 @@ const Context = ({children}) => {
     const getProducts = async () =>{
         try{
             const { data } = await axios('/products');
-            console.log(data)
+            // console.log(data)
             setProducts(data);
         }
-        catch (err)   {  console.error(err.message) }
-        
+        catch (err)   {  console.error(err.message) }    
     }
-    
-    useEffect(() => {  
+     useEffect(() => {  
         getProducts();
      }, [])
 
