@@ -24,9 +24,9 @@ const Home = () => {
   };
 
   return products ? (
-    <div className='flex flex-col lg:flex-row'>
+    <div className='flex flex-col lg:flex-row  lg:h-screen'>
       <Nav />
-      <div className="h-full w-[90%] mx-auto p-6 bg-red-100 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 overflow-x-hidden overflow-y-scroll scrol">
+      <div className="lg:h-screen w-[90%] mx-auto p-6 bg-slate-200 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 overflow-x-hidden overflow-y-scroll scrol">
         {products.map((product) => (
           
       <Link  to={`/details/${product.id}`}  key={product.id}  className="p-4 border shadow-md rounded-lg flex flex-col items-center transition-transform duration-300 hover:scale-[1.03] hover:border-2 bg-white" >
