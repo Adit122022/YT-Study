@@ -3,6 +3,9 @@ import { useParams, Link } from "react-router-dom";
 import { ProductContext } from "../utils/Context";
 import Loading from "./Loading";
 
+import { IoMdArrowRoundBack } from "react-icons/io";
+import Nav from "./Nav";
+
 const CategoryPage = () => {
   const { category } = useParams();
   const [products] = useContext(ProductContext);
@@ -27,11 +30,17 @@ const CategoryPage = () => {
   };
 
   return (
+    <div className='flex flex-col lg:flex-row  lg:h-screen'>
+      <Nav />
     <div className="container mx-auto p-6">
       {/* Header */}
-      <h1 className="text-3xl font-bold text-gray-800 mb-6 capitalize">
-        {category} Collection
-      </h1>
+      
+            {/* Product Info */}
+            <div className="flex items-center w-[60%] px-9 justify-between gap-3 mb-10">
+              <Link to="/" className="px-5 py-2 border rounded border-blue-300 flex items-center gap-5 text-blue-400"><IoMdArrowRoundBack />
+              Home</Link>
+              <h1 className="text-2xl font-semibold text-gray-800"> {category} Collection</h1>
+            </div>
 
       {/* Check if products are available */}
       {categoryProducts?.length > 0 ? (
@@ -75,6 +84,7 @@ const CategoryPage = () => {
       ) : (
         <Loading />
       )}
+    </div>
     </div>
   );
 };
