@@ -1,0 +1,10 @@
+
+[build]
+  base = "FRONTEND_PROJECTS/ImageInhancer" # Set to the correct subdirectory
+  publish = "dist"  # Vite outputs the build to 'dist'
+  command = "npm run build"  # Ensure this matches your package.json build script
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
