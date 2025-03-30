@@ -1,11 +1,34 @@
-import React from 'react'
+import React, { useRef } from 'react'
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap'
 import taxi from '/public/taxi.png';
+import 'remixicon/fonts/remixicon.css'
 
-const LookingForDriver = () => {
+const LookingForDriver = ({vehicleFound ,setVehicleFound ,setConfirmRidePannel}) => {
+
+  const vehicleFoundRef = useRef(null)
+   const vehcileFoundCloseRef = useRef(null)
+  
+
+  useGSAP(function(){
+      if(vehicleFound){
+        gsap.to(vehicleFoundRef.current,{
+          transform:"translateY(0)"
+        })
+      }else {
+        gsap.to(vehicleFoundRef.current,{
+          transform:"translateY(100%)"
+        })
+      }
+    }, [vehicleFound])
   return (
-    <>
+     <div ref={vehicleFoundRef}  className="fixed bottom-0 w-full translate-y-full  bg-white  rounded-t-lg px-3 py-6 shadow-md z-50"> 
        <div className='mb-5 flex justify-start pl-1'>
-       <h5    className='absolute opacity-1 top-6 right-6 text-2xl font-bold'><i className="ri-arrow-down-wide-fill"></i></h5>
+       <h5 ref={vehcileFoundCloseRef}  
+       onClick={()=>{ 
+        setVehicleFound(false)
+         setConfirmRidePannel(true)}}
+          className='absolute top-6 right-6 text-2xl font-bold '><i className="ri-arrow-down-wide-fill"></i></h5>
            <h1 className='text-2xl font-bold font-sans'>Looking For a  Driver</h1>
        </div>
          <div className="flex flex-col items-center justify-between px-2 mb-4   border-2 border-transparent active:border-gray-800   rounded-md">
@@ -45,7 +68,7 @@ const LookingForDriver = () => {
            </div>
          </div>
          
-      </>
+      </div>
   )
 }
 

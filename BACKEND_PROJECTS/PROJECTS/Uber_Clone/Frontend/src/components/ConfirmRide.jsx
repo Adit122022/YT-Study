@@ -3,7 +3,7 @@ import { useGSAP } from '@gsap/react';
 import gsap from 'gsap'
 import taxi from '/public/taxi.png';
 
-const ConfirmRide = ({confirmRidePannel ,setConfirmRidePannel ,setVehicleFound}) => {
+const   ConfirmRide = ({confirmRidePannel ,setConfirmRidePannel ,setVehicleFound}) => {
     const vehcileRef = useRef(null)
     const vehcileCloseRef = useRef(null)
 
@@ -63,7 +63,7 @@ const ConfirmRide = ({confirmRidePannel ,setConfirmRidePannel ,setVehicleFound})
      </div>
      <button onClick={()=>{
          setVehicleFound(true)
-        
+          setConfirmRidePannel(false)    
      }} className='w-full  py-3 bg-green-400 text-white font-bold   text-lg rounded-2xl'>Confirm</button>
    </div>
  );
