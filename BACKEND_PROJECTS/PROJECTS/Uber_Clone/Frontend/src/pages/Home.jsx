@@ -8,6 +8,7 @@ import LocationSearchPanel from '../components/LocationSearchPanel';
 import VechileInformation from '../components/VechileInformation';
 import ConfirmRide from '../components/ConfirmRide';
 import LookingForDriver from '../components/LookingForDriver';
+import WaitngForDriver from '../components/WaitngForDriver';
 
 gsap.registerPlugin(useGSAP);
 
@@ -18,6 +19,7 @@ const Home = () => {
   const [vehiclePanel, setVehiclePanel] = useState(false)
  const [confirmRidePannel, setConfirmRidePannel] = useState(false)
  const [vehicleFound, setVehicleFound] = useState(false)
+ const [waitingForDriver, setWaitingForDriver] = useState(false)
 
   const pannelReff = useRef(null)
   
@@ -46,13 +48,13 @@ e.preventDefault()
   return (
     <div className='h-screen w-screen relative overflow-x-hidden overflow-y-scroll'>
       <img className=' object-cover w-16 absolute left-5 top-5' src={black} alt="Uber Logo" />
-      <div  className="h-screen w-screen">
         {/* image for temporary image */}
+      <div  className="h-screen w-screen">
         <img className='h-full w-full object-cover' src={mapImage} alt="" />
       </div>
 
+{/*  Location search Pannel */}
       <div  className='  flex flex-col justify-end h-screen absolute top-0 w-full rounded-t-3xl'>
-
        <div className='h-[30%] bg-white p-5 relative'>
        <h5 ref={panelCloseRef} onClick={()=>{setPanelOpen(false)}} className='absolute opacity-0 top-6 right-6 text-2xl font-bold'><i className="ri-arrow-down-wide-fill"></i></h5>
        <h4 className='text-3xl font-bold'>Find a Trip</h4>
@@ -64,14 +66,18 @@ e.preventDefault()
            className='bg-[#eee] px-12 py-2 text-lg rounded-lg w-full mt-3 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"' type="text" placeholder='Enter Dropoff Location' />
         </form>
        </div>
-
-       <div ref={pannelReff} className=' opacity-0 h-[70%] bg-white  '>
+      <div ref={pannelReff} className=' opacity-0 h-[70%] bg-white  '>
      <LocationSearchPanel setPanelOpen ={setPanelOpen}  setVehiclePanel = {setVehiclePanel}/>
        </div>
       </div>
+      {/* Vechile Information Pannel */}
       <VechileInformation setConfirmRidePannel={setConfirmRidePannel} vehiclePanel ={vehiclePanel} setVehiclePanel ={setVehiclePanel}/>
+      {/* Confirm Ride Pannel */}
       <ConfirmRide  confirmRidePannel={confirmRidePannel} setConfirmRidePannel={setConfirmRidePannel}  setVehicleFound={setVehicleFound}/>
+      {/* Looking for Driver Pannel */}
      <LookingForDriver vehicleFound ={vehicleFound} setConfirmRidePannel={setConfirmRidePannel} setVehicleFound={setVehicleFound} />
+     {/* Waiting for Driver Pannel */}
+     <WaitngForDriver setWaitingForDriver={setWaitingForDriver} waitingForDriver={waitingForDriver}/>
     </div>
   )
 }
