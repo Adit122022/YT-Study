@@ -6,7 +6,7 @@ import CategoryPage from './Components/CategoryPage'
 
 const App = () => {
   return (
-    <div className='h-screen w-screen flex'>
+    <div className='h-screen w-screen overflow-hidden'>
     <Routes>
       <Route path='/' element={<Home/>}/>
       <Route path='/details/:id' element={<Details/>}/>

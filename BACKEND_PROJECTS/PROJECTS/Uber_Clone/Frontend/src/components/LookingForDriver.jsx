@@ -3,7 +3,7 @@ import taxi from '/public/taxi.png';
 
 const LookingForDriver = () => {
   return (
-    <div  className="fixed bottom-0 w-full translate-y-full  bg-white  rounded-t-lg px-3 py-6 shadow-md z-50"> 
+    <>
        <div className='mb-5 flex justify-start pl-1'>
        <h5    className='absolute opacity-1 top-6 right-6 text-2xl font-bold'><i className="ri-arrow-down-wide-fill"></i></h5>
            <h1 className='text-2xl font-bold font-sans'>Looking For a  Driver</h1>
@@ -45,7 +45,7 @@ const LookingForDriver = () => {
            </div>
          </div>
          
-       </div>
+      </>
   )
 }
 

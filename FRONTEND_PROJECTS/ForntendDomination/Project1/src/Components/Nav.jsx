@@ -31,7 +31,7 @@ const Nav = () => {
     }
   }
   return (
-    <nav className='md:w-[20%] md:h-full h-fit bg-zinc-100 flex flex-col items-center pt-5 px-4 shadow-md'>
+    <nav className='md:w-[20%] md:h-screen h-fit bg-zinc-100 flex flex-col items-center pt-5 px-4 shadow-md'>
       {/* Add New Product Button */}
       <Link 
         to="/create" 

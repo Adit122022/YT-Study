@@ -20,6 +20,7 @@ const Home = () => {
  const [vehicleFound, setVehicleFound] = useState(false)
 
   const pannelReff = useRef(null)
+  const vehicleFoundRef = useRef(null)
   const panelCloseRef = useRef(null)
   const submithandler = (e)=>{
 e.preventDefault()
@@ -38,6 +39,18 @@ e.preventDefault()
       ease: "power2.inOut"
     });
   },[panelOpen ]);
+
+  useGSAP(function(){
+    if(vehicleFound){
+      gsap.to(vehicleFoundRef.current,{
+        transform:"translateY(0)"
+      })
+    }else {
+      gsap.to(vehicleFoundRef.current,{
+        transform:"translateY(100%)"
+      })
+    }
+  }, [vehicleFoundRef])
     
  
   return (
@@ -67,8 +80,10 @@ e.preventDefault()
        </div>
       </div>
       <VechileInformation setConfirmRidePannel={setConfirmRidePannel} vehiclePanel ={vehiclePanel} setVehiclePanel ={setVehiclePanel}/>
-      <ConfirmRide  confirmRidePannel={confirmRidePannel} setConfirmRidePannel={setConfirmRidePannel}/>
-      <LookingForDriver/>
+      <ConfirmRide  confirmRidePannel={confirmRidePannel} setConfirmRidePannel={setConfirmRidePannel}  setVehicleFound={setVehicleFound}/>
+      <div ref={vehicleFoundRef}  className="fixed bottom-0 w-full translate-y-full  bg-white  rounded-t-lg px-3 py-6 shadow-md z-50"> 
+     <LookingForDriver />
+     </div>
     </div>
   )
 }
