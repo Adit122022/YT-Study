@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import ImagePreview from './ImagePreview'
 import ImgaeUpload from './ImgaeUpload'
+import Loading from './Loading'
 
 const Home = () => {
     const [uploadImage, setUploadImage] = useState(null)
@@ -14,7 +15,7 @@ const Home = () => {
      }
 
   return (
-    <div className="w-full flex flex-col items-center space-y-6">
+    <div className="w-full flex flex-col items-center h-full space-y-6">
         <ImgaeUpload uploadImageHandler={uploadImageHandler} />
         <ImagePreview loading={loading} uploadImage={uploadImage} enhancedImage={enhancedImage} />
     </div>
