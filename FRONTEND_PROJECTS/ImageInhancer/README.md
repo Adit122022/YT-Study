@@ -1,6 +1,6 @@
 # 📸 Image Enhancer ✨
 
-**Live Demo:** [Coming Soon]
+**Live Demo:** (https://imageenhance.netlify.app/)
 
 ## 📌 About the Project
 The **Image Enhancer** is a React-based web application that allows users to upload images and enhance them using AI-powered techniques. The tool improves image clarity, sharpness, and overall quality.
