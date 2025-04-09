@@ -4,20 +4,42 @@ import { useAuthStore } from "../store/useAuthStore";
 import { Eye, EyeOff, Loader2, Lock, Mail, MessageSquare, User } from "lucide-react";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
+import AuthImagePattern from "../components/AuthImagePattern";
+import { axiosInstance } from "../lib/axios";
 
 const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
-    fullName: "",
+    fullname: "",
     email: "",
     password: "",
   });
 
   const { signup, isSigningUp } = useAuthStore();
 
-  const validateForm = () => {};
-  const handleSubmit = (e) => {
+
+  const validateForm = () => {
+    if (!formData.fullname.trim()) return toast.error("Full name is required");
+  
+    if (!formData.email.trim()) return toast.error("Email is required");
+  
+    if (!/\S+@\S+\.\S+/.test(formData.email))
+      return toast.error("Invalid email format");
+  
+    if (!formData.password) return toast.error("Password is required");
+  
+    if (formData.password.length < 6)
+      return toast.error("Password must be at least 6 characters");
+  
+    return true; // ✅ All checks passed
+  };
+  
+  const handleSubmit = async(e) => {
     e.preventDefault();
+  const success=  validateForm()
+  if(success === true) signup(formData);
+
+ 
   };
   return <div className="min-h-screen grid lg:grid-cols-2">
   {/* left side */}
@@ -29,7 +51,7 @@ const Signup = () => {
           <div
             className="size-12 rounded-xl bg-primary/10 flex items-center justify-center 
           group-hover:bg-primary/20 transition-colors"
-          >
+          >    
             <MessageSquare className="size-6 text-primary" />
           </div>
           <h1 className="text-2xl font-bold mt-2">Create Account</h1>
@@ -52,8 +74,8 @@ const Signup = () => {
              px-3 py-2 text-sm sm:text-base
              focus:outline-none focus:ring-1 focus:ring-primary focus:border-transparent`}
               placeholder="John Doe"
-              value={formData.fullName}
-              onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
+              value={formData.fullname}
+              onChange={(e) => setFormData({ ...formData, fullname: e.target.value })}
             />
           </div>
         </div>
@@ -110,6 +132,8 @@ const Signup = () => {
         </div>
 
         <button type="submit" className="btn btn-primary w-full" disabled={isSigningUp}>
+         
+         
           {isSigningUp ? (
             <>
               <Loader2 className="size-5 animate-spin" />
@@ -120,7 +144,7 @@ const Signup = () => {
           )}
         </button>
       </form>
-
+{/*  Already have an account? */}
       <div className="text-center">
         <p className="text-base-content/60">
           Already have an account?{" "}
@@ -134,10 +158,10 @@ const Signup = () => {
 
   {/* right side */}
 
-  {/* <AuthImagePattern
-    title="Join our community"
-    subtitle="Connect with friends, share moments, and stay in touch with your loved ones."
-  /> */}
+  <AuthImagePattern
+    title="Welcome to DevHub"
+    subtitle="Share your ideas, connect with people, and grow your network in a space made for developers and creators."
+  />
 </div>
 };
 
