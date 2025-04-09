@@ -2,10 +2,10 @@ import mongoose from "mongoose";
  
 
 const messageSchema = new mongoose.Schema({
-    fullname:{type:String ,required:true},
-    email:{type:String ,required:true,unique:true},
-    password:{type:String ,required:true , minlength:[6,"Password must be at least 6 characters"]},
-    profilePic:{type:String ,default:""}
-}, {timestamps:true});
+    senderId:{type:mongoose.Schema.Types.ObjectId, ref:"User" , required:true},
+    receiverId:{type:mongoose.Schema.Types.ObjectId, ref:"User" , required:true},
+    text:{type:String , required:true},
+    image:{type:String , default:""},
+})
 const Messages = mongoose.model("Message", messageSchema);
 export default Messages;
