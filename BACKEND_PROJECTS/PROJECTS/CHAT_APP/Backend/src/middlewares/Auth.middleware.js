@@ -5,7 +5,7 @@ export const protect = async (req, res, next) => {
     // console.log(req.cookies.jwt)
      const token = req.cookies.jwt;
      if(!token){
-        res.status(400).jspn({message:"UNAUTHORIZED"})
+        res.status(400).json({message:"UNAUTHORIZED"})
      }
      const decoded = jwt.verify(token , process.env.JWT_SECRET);
      if(!decoded){
