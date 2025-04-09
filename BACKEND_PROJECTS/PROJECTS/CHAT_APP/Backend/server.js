@@ -1,8 +1,8 @@
-import app from './src/app.js';
 import dotenv from 'dotenv';
+dotenv.config();
+import app from './src/app.js';
 import connect from './src/db/db.js';
 
-dotenv.config();
 connect();
 
 app.listen(process.env.PORT, ()=>{
