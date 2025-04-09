@@ -37,7 +37,7 @@ res.status(200).json(message)
         const { id:receiverId } = req.params;  // userToChatID
         const senderId = req.user._id;  //loggedInUser
   let imageUrl ;
-    const uploadResponse = await cloudinary.uploader.upload(imageUrl)
+    const uploadResponse = await cloudinary.uploader.upload(image)
     imageUrl = uploadResponse.secure_url;
      const newMessage = await Messages.create({
         senderId,
