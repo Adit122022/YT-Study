@@ -49,6 +49,22 @@ try {
     // console.log("useAuthStore (logout)  ---> ", error.response.data.message)
     toast.error(error.response.data.message); 
 }
-}
+},
 
+login:async(data)=>{
+    set({isLoggingIn:true});
+
+    try {
+     const res= await  axiosInstance.post("/auth/login" , data)
+     set({ authUser: res.data });
+     toast.success("Login successfully")
+        
+      } catch (error) {
+        //  console.log("useAuthStore (signup)  ---> ", error.response.data.message)
+         toast.error(error.response.data.message)
+
+        }finally{
+        set({isLoggingIn: false})
+      }
+}
 }))
