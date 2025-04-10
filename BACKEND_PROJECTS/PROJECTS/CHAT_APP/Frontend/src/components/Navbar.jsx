@@ -3,6 +3,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { useAuthStore } from '../store/useAuthStore'
 import Theme from '../assets/Theme'
+import Magnet from '../assets/REACT BITE/Magnet'
 
 
 
@@ -29,7 +30,7 @@ const Navbar = () => {
             <Link
               to={"/settings"}
               className={`
-              btn btn-sm gap-2 transition-colors
+              btn btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl  btn-ghost gap-2 transition-colors
               
               `}
             >
@@ -39,15 +40,19 @@ const Navbar = () => {
 
             {authUser && (
               <>
-                <Link to={"/profile"} className={`btn btn-sm gap-2`}>
+                <Link to={"/profile"} className={`btn btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl  btn-ghost gap-2`}>
                   <User className="size-5" />
                   <span className="hidden sm:inline">Profile</span>
                 </Link>
 
-                <button className="flex gap-2 items-center" onClick={logout}>
+               
+
+                
+                <button className="flex gap-2 items-center btn btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl  btn-ghost" onClick={logout}>
                   <LogOut className="size-5" />
                   <span className="hidden sm:inline">Logout</span>
                 </button>
+
               </>
             )}
           </div>
